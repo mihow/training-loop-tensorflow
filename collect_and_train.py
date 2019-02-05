@@ -64,6 +64,7 @@ run(
     f"""
     python -m scripts.label_image \
             --graph=tf_files/{PROJECT}-retrained_graph.pb \
+            --labels=tf_files/{PROJECT}-retrained_labels.txt \
             --webcam
     """
 )
