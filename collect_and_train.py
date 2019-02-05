@@ -19,7 +19,7 @@ ARCHITECTURE = os.environ.get('ARCHITECTURE', 'mobilenet_1.0_224')
 
 def run(cmd):
     """Run shell command."""
-    print("\n\033[0;32m", cmd, "\033[0m\n")
+    print("\n\033[0;32m", cmd.strip(), "\033[0m\n")
     result = os.system(cmd)
     if result != 0:
         sys.exit(1)
@@ -50,8 +50,8 @@ run(
             --how_many_training_steps=500 \
             --model_dir=tf_files/models/ \
             --summaries_dir=tf_files/training_summaries/"{ARCHITECTURE}"/{PROJECT}-{time.time()}\
-            --output_graph=tf_files/retrained_graph.pb \
-            --output_labels=tf_files/retrained_labels.txt \
+            --output_graph=tf_files/{PROJECT}-retrained_graph.pb \
+            --output_labels=tf_files/{PROJECT}-retrained_labels.txt \
             --architecture="{ARCHITECTURE}" \
             --image_dir={PROJECT_DIR} \
             --learning-rate=0.01
@@ -63,7 +63,7 @@ run(
 run(
     f"""
     python -m scripts.label_image \
-            --graph=tf_files/retrained_graph.pb \
+            --graph=tf_files/{PROJECT}-retrained_graph.pb \
             --webcam
     """
 )
