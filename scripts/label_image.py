@@ -25,6 +25,7 @@ import tempfile
 import numpy as np
 import tensorflow as tf
 
+
 def load_graph(model_file):
   graph = tf.Graph()
   graph_def = tf.GraphDef()
@@ -156,9 +157,7 @@ if __name__ == "__main__":
     return(best_guess)
   
   if args.webcam:
-
     import cv2
-    from webcam_test import show_webcam
     font = cv2.FONT_HERSHEY_COMPLEX
     cam = cv2.VideoCapture(0)
 

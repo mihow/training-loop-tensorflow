@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import os
 import sys
 import time
@@ -41,7 +43,7 @@ while keep_collecting:
 
 
 # Train on new data
-os.system(
+run(
     f"""
     python -m scripts.retrain \
             --bottleneck_dir=tf_files/bottlenecks/{PROJECT} \
@@ -58,7 +60,7 @@ os.system(
 
 
 # Test model with webcam
-os.system(
+run(
     f"""
     python -m scripts.label_image \
             --graph=tf_files/retrained_graph.pb \

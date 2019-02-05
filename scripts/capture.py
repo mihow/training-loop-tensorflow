@@ -20,7 +20,9 @@ def choose_dir(base_dir='tf_files', preselected=None):
                 if os.path.isdir(os.path.join(base_dir, d)) 
                 and not d.startswith('.')]
         for i, d in enumerate(dirs):
-            print(f"({i}) {d}")
+            print(f"\033[0;32m{i}) {d}\033[0m")
+        if not dirs:
+            print(f"\033[0;32m(nothing found)\033[0m")
         print()
 
         choice = input("Select from the list above or provide a new name: ").strip()
@@ -34,7 +36,7 @@ def choose_dir(base_dir='tf_files', preselected=None):
     chosen_path = os.path.join(base_dir, sub_dir)
     os.makedirs(chosen_path, exist_ok=True)
 
-    print(f'Using "{chosen_path}"')
+    print(f'Using dir "{chosen_path}"')
     return chosen_path
 
 
@@ -47,7 +49,7 @@ def capture(image_path, mirror=False):
     num_samples = 0
     last_time = time.time()
 
-    while num_samples < 60:
+    while num_samples < 30:
         ret_val, img = cam.read()
         if mirror: 
             img = cv2.flip(img, 1)
@@ -71,15 +73,15 @@ def main(base_dir='tf_files', project=None, label=None, mirror=False):
     print()
 
     if not base_dir:
-        print(f"+ Choose or create a base directory for all projects", end="\n\n")
+        print(f"\nChoose or create a base directory for all projects:\n")
         base_dir = choose_dir(base_dir='.')
 
     if not project:
-        print(f"+ Choose or create a new project", end="\n\n")
+        print(f"\nChoose or create a new project:\n")
     project_dir = choose_dir(base_dir='tf_files', preselected=project)
 
     if not label:
-        print(f"+ Choose or create a new label", end="\n\n")
+        print(f"\nChoose or create a new label:\n")
     label_dir = choose_dir(base_dir=project_dir, preselected=label)
 
     capture(image_path=label_dir, mirror=mirror)
