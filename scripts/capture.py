@@ -23,7 +23,6 @@ def choose_dir(base_dir='tf_files', preselected=None):
             print(f"\033[0;32m{i}) {d}\033[0m")
         if not dirs:
             print(f"\033[0;32m(nothing found)\033[0m")
-        print()
 
         choice = input("Select from the list above or provide a new name: ").strip()
         try:
@@ -69,21 +68,20 @@ def capture(image_path):
 
 
 def main(base_dir='tf_files', project=None, label=None, mirror=False):
-    print()
 
     if not base_dir:
-        print(f"\nChoose or create a base directory for all projects:\n")
+        print(f"\nChoose or create a base directory for all projects:")
         base_dir = choose_dir(base_dir='.')
 
     if not project:
-        print(f"\nChoose or create a new project:\n")
+        print(f"\nChoose or create a new project:")
     project_dir = choose_dir(base_dir='tf_files', preselected=project)
 
     if not label:
-        print(f"\nChoose or create a new label:\n")
+        print(f"\nChoose or create a new label:")
     label_dir = choose_dir(base_dir=project_dir, preselected=label)
 
-    capture(image_path=label_dir, mirror=mirror)
+    capture(image_path=label_dir)
 
     return project_dir, label_dir
 
