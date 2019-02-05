@@ -40,7 +40,7 @@ def choose_dir(base_dir='tf_files', preselected=None):
     return chosen_path
 
 
-def capture(image_path, mirror=False):
+def capture(image_path):
     cam = cv2.VideoCapture(0)
 
     print('get ready...')
@@ -51,8 +51,7 @@ def capture(image_path, mirror=False):
 
     while num_samples < 30:
         ret_val, img = cam.read()
-        if mirror: 
-            img = cv2.flip(img, 1)
+        img = cv2.flip(img, 1)
         cv2.imshow('webcam', img)
         if (time.time() - last_time) > 0.5:
             print("sample...", end="")
@@ -94,8 +93,6 @@ if __name__ == '__main__':
     parser.add_argument('--base_dir', default='tf_files', help="Root directory of data for all projects")
     parser.add_argument('--project', help="Name of project to use for base image dir")
     parser.add_argument('--label', help="Name of label or category to collect")
-    parser.add_argument('--mirror', action='store_true',
-                        help="Flip the camera (helpful if capturing toward you)")
     args = parser.parse_args()
 
     main(**args.__dict__)
