@@ -79,7 +79,7 @@ def main(do_collect=True, do_train=True, do_test=True):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project', default='project',
+    parser.add_argument('project', default=PROJECT, nargs='?',
                         help="Project name used for directory names, etc.")
     parser.add_argument('--no-collect', dest='collect', action='store_false',
                         help="Skip collecting samples")
