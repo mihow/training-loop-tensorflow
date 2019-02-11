@@ -16,12 +16,7 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    return Response('Tensor Flow object detection')
-
-
-@app.route('/local')
-def local():
-    return Response(open('./static/local.html').read(), mimetype="text/html")
+    return Response(open('./static/index.html').read(), mimetype="text/html")
 
 
 @app.route('/video')
