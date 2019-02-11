@@ -27,8 +27,8 @@ def load_labels(label_file):
   return label
 
 
-graph = load_graph('tf_files/studio-retrained_graph.pb')
-labels = load_labels('tf_files/studio-retrained_labels.txt')
+graph = load_graph('tf_files/retrained_graph.pb')
+labels = load_labels('tf_files/retrained_labels.txt')
 
 
 # Helper code
