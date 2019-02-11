@@ -48,6 +48,7 @@ def load_image_into_numpy_array(image,
 
 
 def predict(image):
+    start = time.time()
     t = load_image_into_numpy_array(image)
 
     input_name = "import/input"
@@ -56,12 +57,11 @@ def predict(image):
     output_operation = graph.get_operation_by_name(output_name)
 
     with tf.Session(graph=graph) as sess:
-        start = time.time()
         results = sess.run(output_operation.outputs[0], {input_operation.outputs[0]: t})
-        end = time.time()
     results = np.squeeze(results)
 
     top_k = results.argsort()[-5:][::-1]
+    end = time.time()
 
     print("\nEvaluation time (1-image): {:.3f}s\n".format(end - start))
     template = "{} (score={:0.5f})"
